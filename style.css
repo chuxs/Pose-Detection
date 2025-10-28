@@ -1,0 +1,35 @@
+body {
+  background: #0b1220;
+  color: #e6eef6;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.app {
+  text-align: center;
+}
+
+.camera {
+  position: relative;
+  width: 640px;
+  height: 480px;
+}
+
+video, canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 480px;
+  border-radius: 10px;
+  transform: scaleX(-1); /* flips the camera view */
+}
+
+#status {
+  margin-top: 15px;
+  color: #9aa7b2;
+}

@@ -1,5 +1,5 @@
 //-----------------------------------------------------
-// MoveNet Posture Monitor – Distance Adaptive
+// MoveNet Posture Monitor – Distance Adaptive (with Notifications)
 //-----------------------------------------------------
 
 let detector;
@@ -99,6 +99,24 @@ async function setupCamera() {
   }
 }
 
+// ✅ Notification helper
+function showNotification(title, body) {
+  if (!("Notification" in window)) {
+    console.warn("This browser does not support notifications.");
+    return;
+  }
+
+  if (Notification.permission === "granted") {
+    new Notification(title, { body, icon: "warning.png" });
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        new Notification(title, { body, icon: "warning.png" });
+      }
+    });
+  }
+}
+
 // Calculate shoulder angle (horizontal tilt)
 function getShoulderAngle(LS, RS) {
   const dx = RS.x - LS.x;
@@ -187,7 +205,7 @@ function drawPose(kp, shoulderAngle, currentDiff = 0) {
   }
 }
 
-// Simple calibration like the working version
+// Simple calibration
 function calibratePosture(shoulderMid, nose) {
   if (!shoulderMid || !nose) return;
   
@@ -195,7 +213,6 @@ function calibratePosture(shoulderMid, nose) {
   baselineSamples.push(diff);
 
   if (baselineSamples.length >= 30) {
-    // Simple average like the original working code
     baseline = baselineSamples.reduce((a, b) => a + b, 0) / baselineSamples.length;
     calibrated = true;
     
@@ -206,19 +223,17 @@ function calibratePosture(shoulderMid, nose) {
   }
 }
 
-// Simplified posture analysis - based on working version
+// Simplified posture analysis
 function analyzePosture(kp) {
   const nose = kp[0];
   const LS = kp[5];
   const RS = kp[6];
 
-  // Simple validation - need all three points
   if (!nose || !LS || !RS) {
     return { bad: false, reasons: [], shoulderAngle: 0, valid: false };
   }
 
   const reasons = [];
-  
   const shoulderMid = { 
     x: (LS.x + RS.x) / 2, 
     y: (LS.y + RS.y) / 2 
@@ -227,27 +242,22 @@ function analyzePosture(kp) {
   const shoulderAngle = getShoulderAngle(LS, RS);
   const currentDiff = nose.y - shoulderMid.y;
 
-  // Simple forward lean detection - fixed threshold like working version
   if (calibrated) {
     const deviation = currentDiff - baseline;
-    
-    // Simple fixed threshold of 35 pixels
     if (deviation > 35) {
       reasons.push("Forward Lean");
     }
   }
 
-  // Simple shoulder tilt - fixed threshold
   if (Math.abs(shoulderAngle) > 10) {
     reasons.push("Shoulder Tilt");
   }
 
-  // Simple history tracking
   history.push(reasons.length);
   if (history.length > 12) history.shift();
   
   const avgBadness = history.reduce((a, b) => a + b, 0) / history.length;
-  const consistent = avgBadness >= 1.2; // Same as working version
+  const consistent = avgBadness >= 1.2;
 
   debugEl.innerText = `Baseline: ${baseline.toFixed(1)} | Deviation: ${(currentDiff - baseline).toFixed(1)} | History avg: ${avgBadness.toFixed(2)}`;
 
@@ -315,7 +325,7 @@ async function detectLoop() {
 
       if (secs >= BAD_POSTURE_SECONDS && !alerted) {
         alerted = true;
-        alert(`⚠️ Fix your posture! ${result.reasons.join(", ")}`);
+        showNotification("⚠️ Fix Your Posture", `Detected: ${result.reasons.join(", ")}`);
         badStart = null;
         alerted = false;
         history = [];

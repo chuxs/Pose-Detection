@@ -109,7 +109,6 @@ function drawPose(kp, shoulderAngle) {
   ctx.fillText(`Shoulder Angle: ${shoulderAngle.toFixed(1)}°`, midX - 100, midY);
 }
 
-
 // ✅ Auto-calibration
 function calibratePosture(midShoulder, nose) {
   const diff = nose.y - midShoulder.y;
@@ -123,7 +122,6 @@ function calibratePosture(midShoulder, nose) {
   }
 }
 
-
 // ✅ Posture Logic
 function analyzePosture(kp) {
   const nose = kp[0];
@@ -131,6 +129,10 @@ function analyzePosture(kp) {
   const RS = kp[6];
   const LH = kp[11];
   const RH = kp[12];
+  const leftEye = kp[1];
+  const rightEye = kp[2];
+  const leftEar = kp[3];
+  const rightEar = kp[4];
 
   if (!nose || !LS || !RS || !LH || !RH)
     return { bad:false, reasons:[], shoulderAngle:0 };
@@ -138,11 +140,14 @@ function analyzePosture(kp) {
   const reasons = [];
   const shoulderMid = { x:(LS.x+RS.x)/2, y:(LS.y+RS.y)/2 };
   const hipMid = { x:(LH.x+RH.x)/2, y:(LH.y+RH.y)/2 };
-
   const shoulderAngle = getShoulderAngle(LS, RS);
 
-  // ✅ Forward Lean Detection
-  if (calibrated) {
+  // ✅ Face visibility check to avoid false detection when arms block the face
+  const visibleFacePoints = [nose, leftEye, rightEye, leftEar, rightEar].filter(p => p?.score > 0.5).length;
+  const faceVisible = visibleFacePoints >= 2;
+
+  // ✅ Forward Lean Detection (only if face visible)
+  if (calibrated && faceVisible) {
     const diff = nose.y - shoulderMid.y;
     if (diff > baseline + 35) reasons.push("Forward Lean");
   }
@@ -159,6 +164,19 @@ function analyzePosture(kp) {
 }
 
 
+// ✅ Windows Notification
+function showNotification(title, body) {
+  if (Notification.permission === "granted") {
+    new Notification(title, { body, icon: "warning.png" });
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        new Notification(title, { body, icon: "warning.png" });
+      }
+    });
+  }
+}
+
 // ---- MAIN LOOP ----
 async function detectLoop() {
   const poses = await detector.estimatePoses(video);
@@ -166,7 +184,6 @@ async function detectLoop() {
 
   if (pose?.keypoints) {
     const result = analyzePosture(pose.keypoints);
-
     drawPose(pose.keypoints, result.shoulderAngle);
 
     const now = Date.now();
@@ -187,7 +204,7 @@ async function detectLoop() {
 
       if (secs >= BAD_POSTURE_SECONDS && !alerted) {
         alerted = true;
-        alert(`⚠️ Fix posture: ${result.reasons.join(", ")}`);
+        showNotification("⚠️ Fix Posture", `Detected: ${result.reasons.join(", ")}`);
         badStart = null;
         alerted = false;
         history = [];

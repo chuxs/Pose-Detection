@@ -51,7 +51,8 @@ async function loadModel() {
     detector = await poseDetection.createDetector(
       poseDetection.SupportedModels.MoveNet,
       { 
-        modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
+        modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER,
+        //modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING,
         enableSmoothing: true
       }
     );

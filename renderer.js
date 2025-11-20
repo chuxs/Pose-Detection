@@ -18,15 +18,15 @@ timerText.style.marginTop = "10px";
 document.querySelector(".app").appendChild(timerText);
 
 // Calibration button
-const calibrateBtn = document.createElement("button");
-calibrateBtn.innerText = "Calibrate Good Posture ✅";
-calibrateBtn.style.marginTop = "12px";
-calibrateBtn.style.padding = "8px";
-calibrateBtn.style.background = "#0f62fe";
-calibrateBtn.style.color = "#fff";
-calibrateBtn.style.border = "none";
-calibrateBtn.style.borderRadius = "6px";
-document.querySelector(".app").appendChild(calibrateBtn);
+// const calibrateBtn = document.createElement("button");
+// calibrateBtn.innerText = "Calibrate Good Posture ✅";
+// calibrateBtn.style.marginTop = "12px";
+// calibrateBtn.style.padding = "8px";
+// calibrateBtn.style.background = "#0f62fe";
+// calibrateBtn.style.color = "#fff";
+// calibrateBtn.style.border = "none";
+// calibrateBtn.style.borderRadius = "6px";
+// document.querySelector(".app").appendChild(calibrateBtn);
 
 // Debug info
 const debugEl = document.createElement("div");
@@ -70,8 +70,8 @@ async function setupCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: { 
-        width: 640, 
-        height: 480, 
+        width: 740, 
+        height: 580, 
         facingMode: "user",
         frameRate: { ideal: 30 }
       }
@@ -351,14 +351,14 @@ async function detectLoop() {
 }
 
 // Manual calibration button
-calibrateBtn.addEventListener("click", () => {
-  calibrated = false;
-  baselineSamples = [];
-  history = [];
-  badStart = null;
-  statusEl.innerText = "Re-Calibrating… Sit in your normal position!";
-  statusEl.style.color = "#ffaa00";
-});
+// calibrateBtn.addEventListener("click", () => {
+//   calibrated = false;
+//   baselineSamples = [];
+//   history = [];
+//   badStart = null;
+//   statusEl.innerText = "Re-Calibrating… Sit in your normal position!";
+//   statusEl.style.color = "#ffaa00";
+// });
 
 // ---- START ----
 (async function main() {

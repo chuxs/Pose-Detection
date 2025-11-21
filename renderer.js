@@ -245,7 +245,7 @@ function analyzePosture(kp) {
 
   if (calibrated) {
     const deviation = currentDiff - baseline;
-    if (deviation > 35) {
+    if (deviation > 35 || deviation < -45) {
       reasons.push("Forward Lean");
     }
   }

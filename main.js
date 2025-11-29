@@ -3,8 +3,8 @@ const path = require('path');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 900,
-    height: 720,
+    width: 1820,
+    height: 1100,
     backgroundColor: "#000000",
     webPreferences: {
       nodeIntegration: true,

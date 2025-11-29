@@ -70,8 +70,8 @@ async function setupCamera() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: { 
-        width: 740, 
-        height: 580, 
+        width: 1820, 
+        height: 1100, 
         facingMode: "user",
         frameRate: { ideal: 30 }
       }
@@ -245,13 +245,13 @@ function analyzePosture(kp) {
 
   if (calibrated) {
     const deviation = currentDiff - baseline;
-    if (deviation > 35 || deviation < -45) {
-      reasons.push("Forward Lean");
+    if (deviation > 35 || deviation < -60) {
+      reasons.push("Bad Posture Detected");
     }
   }
 
   if (Math.abs(shoulderAngle) > 10) {
-    reasons.push("Shoulder Tilt");
+    reasons.push("Bad Posture Detected");
   }
 
   history.push(reasons.length);

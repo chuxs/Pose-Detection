@@ -501,8 +501,14 @@ async function detectLoop() {
 
     //--- Handle invalid detection ---
     if (!result.valid) {
-      statusEl.innerText =
-        "⏳ Adjust position - need to see head and shoulders clearly";
+      // During calibration, show progress along with position guidance
+      if (!calibrated) {
+        const progress = Math.min(baselineSamples.length, 30);
+        statusEl.innerText = `Calibrating... ${progress}/30 - Adjust position to see head and shoulders`;
+      } else {
+        statusEl.innerText =
+          "⏳ Adjust position - need to see head and shoulders clearly";
+      }
       statusEl.style.color = "#ffaa00";
       return requestAnimationFrame(detectLoop);
     }

@@ -7,10 +7,6 @@
 // notifications after sustained bad posture.
 //=============================================================================
 
-//-----------------------------------------------------------------------------
-// GLOBAL VARIABLES & CONFIGURATION
-//-----------------------------------------------------------------------------
-
 // Pose detection model instance (initialized in loadModel)
 let detector;
 

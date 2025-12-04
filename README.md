@@ -16,8 +16,7 @@ A real-time posture monitoring desktop application built with Electron and Tenso
 - **Posture Analysis** – Detects bad posture based on:
   - Head/shoulder deviation from baseline
   - Shoulder tilt angle (horizontal alignment)
-- **Desktop Notifications** – Sends system notifications after 10 seconds of continuous bad posture
-- **Smoothed Detection** – Uses historical averaging to prevent false positives from momentary movements
+- **Desktop Notifications** – Sends system notifications after 10 seconds of continuous bad posture. It is 10 seconds for demonstration purposes
 
 ---
 
@@ -95,7 +94,7 @@ Key parameters can be adjusted in `renderer.js`:
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `BAD_POSTURE_SECONDS` | `10` | Seconds of bad posture before notification triggers |
+| `BAD_POSTURE_SECONDS` | `10` | Seconds of bad posture before notification triggers - Demonstration|
 | `leanThreshold` | `35` | Pixel deviation threshold for forward/backward lean |
 | Shoulder angle threshold | `10°` | Maximum acceptable shoulder tilt angle |
 | Calibration samples | `30` | Number of frames collected during calibration |
@@ -184,12 +183,6 @@ The app displays real-time debug info at the bottom:
 
 ---
 
-## 📄 License
-
-This project is licensed under the ISC License.
-
----
-
 ## 🙏 Acknowledgments
 
 - [TensorFlow.js](https://www.tensorflow.org/js) – Machine learning in JavaScript
@@ -204,6 +197,4 @@ This project is licensed under the ISC License.
 - [ ] Adjustable notification threshold via UI
 - [ ] Posture history/statistics tracking
 - [ ] Multiple posture profiles (standing, sitting, etc.)
-- [ ] Audio alerts option
-- [ ] Minimize to system tray
 

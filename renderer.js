@@ -174,13 +174,13 @@ function showNotification(title, body) {
 
   // If permission granted, show notification immediately
   if (Notification.permission === "granted") {
-    new Notification(title, { body, icon: "warning.png" });
+    new Notification(title, { body, icon: "warning.svg" });
   }
   // If not denied, request permission first
   else if (Notification.permission !== "denied") {
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
-        new Notification(title, { body, icon: "warning.png" });
+        new Notification(title, { body, icon: "warning.svg" });
       }
     });
   }

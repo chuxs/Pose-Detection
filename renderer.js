@@ -95,7 +95,7 @@ async function loadModel() {
         enableSmoothing: true, // Reduces jitter in keypoint positions
       }
     );
-    statusEl.innerText = "Model Ready ✅ Sit naturally and click Calibrate";
+    statusEl.innerText = "Model Ready ✅ Calibration will begin automatically";
     console.log("MoveNet model loaded successfully");
   } catch (error) {
     console.error("Error loading model:", error);
@@ -583,7 +583,7 @@ async function detectLoop() {
     statusEl.innerText = "Camera ready! Loading pose detection...";
     await loadModel();
 
-    statusEl.innerText = "Ready! Sit naturally and click Calibrate";
+    statusEl.innerText = "Ready! Sit naturally - calibration starting...";
     detectLoop(); // Start the detection loop
   } catch (error) {
     console.error("Startup error:", error);

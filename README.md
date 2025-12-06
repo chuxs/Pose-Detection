@@ -165,15 +165,6 @@ The app uses the Web Notifications API for desktop alerts. On first run, you'll 
 
 ---
 
-## 🔧 Development
-
-### Enable DevTools
-
-Uncomment line 19 in `main.js` to open Chrome DevTools for debugging:
-
-```javascript
-win.webContents.openDevTools();
-```
 
 ### Debug Information
 
@@ -190,12 +181,5 @@ The app displays real-time debug info at the bottom:
 - [MoveNet](https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html) – Fast and accurate pose detection model
 - [Electron](https://www.electronjs.org/) – Cross-platform desktop apps with JavaScript
 
----
 
-## 🚧 Future Improvements
-
-- [ ] Manual re-calibration button
-- [ ] Adjustable notification threshold via UI
-- [ ] Posture history/statistics tracking
-- [ ] Multiple posture profiles (standing, sitting, etc.)
 

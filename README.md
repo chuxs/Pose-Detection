@@ -6,6 +6,8 @@ A real-time posture monitoring desktop application built with Electron and Tenso
 ![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-3.21.0-FF6F00?logo=tensorflow)
 ![License](https://img.shields.io/badge/License-ISC-blue)
 
+🔗 **Repository:** [https://github.com/chuxs/Pose-Detection](https://github.com/chuxs/Pose-Detection)
+
 ---
 
 ## ✨ Features
@@ -22,13 +24,13 @@ A real-time posture monitoring desktop application built with Electron and Tenso
 
 ## 🛠️ Technology Stack
 
-| Component | Technology |
-|-----------|------------|
-| Desktop Framework | Electron 39.x |
-| ML Framework | TensorFlow.js 3.21 |
-| Pose Model | MoveNet (SINGLEPOSE_THUNDER) |
-| MediaPipe | Pose Detection Backend |
-| Frontend | HTML5 Canvas, CSS3, Vanilla JS |
+| Component         | Technology                     |
+| ----------------- | ------------------------------ |
+| Desktop Framework | Electron 39.x                  |
+| ML Framework      | TensorFlow.js 3.21             |
+| Pose Model        | MoveNet (SINGLEPOSE_THUNDER)   |
+| MediaPipe         | Pose Detection Backend         |
+| Frontend          | HTML5 Canvas, CSS3, Vanilla JS |
 
 ---
 
@@ -43,12 +45,14 @@ A real-time posture monitoring desktop application built with Electron and Tenso
 ### Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-username/Pose-Detection.git
    cd Pose-Detection
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -93,13 +97,13 @@ Pose-Detection/
 
 Key parameters can be adjusted in `renderer.js`:
 
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `BAD_POSTURE_SECONDS` | `10` | Seconds of bad posture before notification triggers - Demonstration|
-| `leanThreshold` | `35` | Pixel deviation threshold for forward/backward lean |
-| Shoulder angle threshold | `10°` | Maximum acceptable shoulder tilt angle |
-| Calibration samples | `30` | Number of frames collected during calibration |
-| History buffer size | `12` | Frames used for smoothing posture detection |
+| Parameter                | Default | Description                                                         |
+| ------------------------ | ------- | ------------------------------------------------------------------- |
+| `BAD_POSTURE_SECONDS`    | `10`    | Seconds of bad posture before notification triggers - Demonstration |
+| `leanThreshold`          | `35`    | Pixel deviation threshold for forward/backward lean                 |
+| Shoulder angle threshold | `10°`   | Maximum acceptable shoulder tilt angle                              |
+| Calibration samples      | `30`    | Number of frames collected during calibration                       |
+| History buffer size      | `12`    | Frames used for smoothing posture detection                         |
 
 ### MoveNet Model Options
 
@@ -107,7 +111,7 @@ The app uses `SINGLEPOSE_THUNDER` by default (more accurate). You can switch to 
 
 ```javascript
 // In renderer.js, loadModel() function
-modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER  // Accurate
+modelType: poseDetection.movenet.modelType.SINGLEPOSE_THUNDER; // Accurate
 // modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING  // Fast
 ```
 
@@ -155,20 +159,20 @@ The app uses the Web Notifications API for desktop alerts. On first run, you'll 
 
 ## 🐛 Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| Camera not detected | Check if another app is using the webcam. Restart the app. |
-| Model fails to load | Ensure you have an internet connection (models load from CDN). |
-| False positives | Ensure good lighting and minimal background movement. |
-| No notifications | Check system notification permissions for the app. |
+| Issue                  | Solution                                                            |
+| ---------------------- | ------------------------------------------------------------------- |
+| Camera not detected    | Check if another app is using the webcam. Restart the app.          |
+| Model fails to load    | Ensure you have an internet connection (models load from CDN).      |
+| False positives        | Ensure good lighting and minimal background movement.               |
+| No notifications       | Check system notification permissions for the app.                  |
 | Low detection accuracy | Ensure your full upper body (head + shoulders) is visible in frame. |
 
 ---
 
-
 ### Debug Information
 
 The app displays real-time debug info at the bottom:
+
 - **Baseline** – Calibrated nose-shoulder distance
 - **Deviation** – Current deviation from baseline
 - **History avg** – Rolling average of posture quality
@@ -180,6 +184,3 @@ The app displays real-time debug info at the bottom:
 - [TensorFlow.js](https://www.tensorflow.org/js) – Machine learning in JavaScript
 - [MoveNet](https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html) – Fast and accurate pose detection model
 - [Electron](https://www.electronjs.org/) – Cross-platform desktop apps with JavaScript
-
-
-

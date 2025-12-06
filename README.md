@@ -6,7 +6,7 @@ A real-time posture monitoring desktop application built with Electron and Tenso
 ![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-3.21.0-FF6F00?logo=tensorflow)
 ![License](https://img.shields.io/badge/License-ISC-blue)
 
-🔗 **Repository:** [https://github.com/chuxs/Pose-Detection](https://github.com/chuxs/Pose-Detection)
+🔗 **Repository:** [https://github.com/chuxs/Pose-Detection/tree/alternativePoseModel](https://github.com/chuxs/Pose-Detection/tree/alternativePoseModel)
 
 ---
 

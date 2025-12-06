@@ -82,6 +82,7 @@ Pose-Detection/
 ├── renderer.js      # Renderer process – pose detection & posture analysis logic
 ├── index.html       # Application UI structure
 ├── style.css        # Application styling
+├── warning.svg      # Notification icon for posture alerts
 ├── package.json     # Project configuration and dependencies
 └── README.md        # This file
 ```

@@ -1,10 +1,9 @@
-# Posture Monitoring Anya 🧘
+# Posture Monitoring System
 
 A real-time posture monitoring desktop application built with Electron and TensorFlow.js. The app uses your webcam to detect body pose and alerts you when poor posture is detected for an extended period.
 
 ![Electron](https://img.shields.io/badge/Electron-39.0.0-47848F?logo=electron)
 ![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-3.21.0-FF6F00?logo=tensorflow)
-![License](https://img.shields.io/badge/License-ISC-blue)
 
 🔗 **Repository:** [https://github.com/chuxs/Pose-Detection/tree/alternativePoseModel](https://github.com/chuxs/Pose-Detection/tree/alternativePoseModel)
 
@@ -161,6 +160,7 @@ The app uses the Web Notifications API for desktop alerts. On first run, you'll 
 
 | Issue                  | Solution                                                            |
 | ---------------------- | ------------------------------------------------------------------- |
+| Wrong "Correct" Posture  | Restart the app. Sit upright as you start the app          |
 | Camera not detected    | Check if another app is using the webcam. Restart the app.          |
 | Model fails to load    | Ensure you have an internet connection (models load from CDN).      |
 | False positives        | Ensure good lighting and minimal background movement.               |
@@ -176,11 +176,3 @@ The app displays real-time debug info at the bottom:
 - **Baseline** – Calibrated nose-shoulder distance
 - **Deviation** – Current deviation from baseline
 - **History avg** – Rolling average of posture quality
-
----
-
-## 🙏 Acknowledgments
-
-- [TensorFlow.js](https://www.tensorflow.org/js) – Machine learning in JavaScript
-- [MoveNet](https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html) – Fast and accurate pose detection model
-- [Electron](https://www.electronjs.org/) – Cross-platform desktop apps with JavaScript
